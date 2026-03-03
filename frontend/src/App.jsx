@@ -15,14 +15,28 @@ import ChangePassword from "./Auth/ChangePassword.jsx";
 import VerifyEmail from "./Auth/VerifyEmail.jsx";
 import Verify from "./Auth/Verify.jsx";
 
+import UserProvider from "./context/AuthContext.jsx";
+import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
+
 const AppLayout = () => {
     const location = useLocation();
 
-    const showNavbarRoutes = ["/", "/about", "/features", "/contact"];
+    const hideNavbarRoutes = [
+        "/login",
+        "/signup",
+        "/forgot-password",
+        "/verify",
+        "/verify-otp",
+        "/change-password",
+    ];
+
+    const shouldHideNavbar = hideNavbarRoutes.some((route) =>
+        location.pathname.startsWith(route)
+    );
 
     return (
         <>
-            {showNavbarRoutes.includes(location.pathname) && <Navbar />}
+            {!shouldHideNavbar && <Navbar />}
 
             <Routes>
                 {/* home, about, features and contact routes without login */}
@@ -43,6 +57,16 @@ const AppLayout = () => {
                 {/* OTP & Reset Password Flow */}
                 <Route path="/verify-otp/:email" element={<VerifyOTP />} />
                 <Route path="/change-password/:email" element={<ChangePassword />} />
+
+                {/* Protected Page */}
+                <Route
+                    path="/dashboard"
+                    element={
+                        <ProtectedRoute>
+                            {/* <Dashboard /> */}
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </>
     );
@@ -51,7 +75,9 @@ const AppLayout = () => {
 const App = () => {
     return (
         <Router>
-            <AppLayout />
+            <UserProvider>
+                <AppLayout />
+            </UserProvider>
         </Router>
     );
 };
