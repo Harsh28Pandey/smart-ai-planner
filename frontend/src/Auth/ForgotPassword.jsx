@@ -89,7 +89,7 @@ const ForgotPassword = () => {
 
                         <button
                             onClick={() => setIsSubmitted(false)}
-                            className="text-sm text-purple-400 hover:underline"
+                            className="text-sm text-purple-400 cursor-pointer hover:text-purple-300 transition-colors"
                         >
                             Try another email
                         </button>
