@@ -10,6 +10,11 @@ import Login from "./Auth/Login.jsx";
 import Signup from "./Auth/Signup.jsx";
 import ForgotPassword from "./Auth/ForgotPassword.jsx";
 
+import VerifyOTP from "./Auth/VerifyOTP.jsx";
+import ChangePassword from "./Auth/ChangePassword.jsx";
+import VerifyEmail from "./Auth/VerifyEmail.jsx";
+import Verify from "./Auth/Verify.jsx";
+
 const AppLayout = () => {
     const location = useLocation();
 
@@ -30,6 +35,14 @@ const AppLayout = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+
+                {/* Verify Email Pages */}
+                <Route path="/verify" element={<VerifyEmail />} />
+                <Route path="/verify/:token" element={<Verify />} />
+
+                {/* OTP & Reset Password Flow */}
+                <Route path="/verify-otp/:email" element={<VerifyOTP />} />
+                <Route path="/change-password/:email" element={<ChangePassword />} />
             </Routes>
         </>
     );

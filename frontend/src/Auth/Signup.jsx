@@ -109,6 +109,13 @@ const SignUp = () => {
                         Sign Up
                     </button>
 
+                    {/* Divider */}
+                    <div className="flex items-center gap-3 text-slate-500 text-xs">
+                        <div className="flex-1 h-px bg-white/10"></div>
+                        OR
+                        <div className="flex-1 h-px bg-white/10"></div>
+                    </div>
+
                     {/* Login Link */}
                     <p className="text-sm text-slate-400 text-center">
                         Already have an account?{" "}
