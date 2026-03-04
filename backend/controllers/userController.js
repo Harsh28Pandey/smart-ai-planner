@@ -102,68 +102,68 @@ export const verification = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     try {
-        const { email, password } = req.body
+        const { email, password } = req.body;
+
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required"
-            })
+            });
         }
 
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ email });
+
         if (!user) {
-            return res.status(400).json({
+            return res.status(401).json({
                 success: false,
-                message: "Unauthorized access"
-            })
+                message: "User not found"
+            });
         }
 
-        const passwordCheck = await bcrypt.compare(password, user.password)
+        const passwordCheck = await bcrypt.compare(password, user.password);
+
         if (!passwordCheck) {
-            return res.status(402).json({
+            return res.status(401).json({
                 success: false,
                 message: "Incorrect Password"
-            })
+            });
         }
 
-        // check if user is verified
-        if (user.isVerified !== true) {
+        if (!user.isVerified) {
             return res.status(403).json({
                 success: false,
-                message: "Verify your account than login"
-            })
+                message: "Verify your account before login"
+            });
         }
 
-        // check for existing session and delete it
-        const existingSession = await Session.findOne({ userId: user._id })
-        if (existingSession) {
-            await Session.deleteOne({ userId: user._id })
-        }
+        const accessToken = jwt.sign(
+            { id: user._id },
+            process.env.SECRET_KEY,
+            { expiresIn: "10d" }
+        );
 
-        // create a new session
-        await Session.create({ userId: user._id })
+        // ✅ UPDATE LOGIN STATUS
+        user.isLoggedIn = true;
 
-        // generate tokens
-        const accessToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "10d" })
-        const refreshToken = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: "30d" })
+        // ✅ SAVE TOKEN IN DB (optional but you want it)
+        user.accessToken = accessToken;
 
-        user.isLoggedIn = true
-        await user.save()
+        await user.save();
 
         return res.status(200).json({
             success: true,
-            message: `Welcome back ${user.username}`,
             accessToken,
-            refreshToken,
             user
-        })
+        });
+
     } catch (error) {
+        console.error("LOGIN ERROR:", error);
         return res.status(500).json({
             success: false,
             message: error.message
-        })
+        });
     }
-}
+};
 
 export const logoutUser = async (req, res) => {
     try {
