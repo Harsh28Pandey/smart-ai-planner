@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
 import { validateEmail } from '../utils/helper.js'
+import axios from "axios";
+import { Loader2 } from "lucide-react";
 
 const SignUp = () => {
     const [fullName, setFullName] = useState("");
@@ -9,13 +11,14 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
 
-        if (!fullName) {
+        if (!fullName.trim()) {
             setError("Please enter full name.");
             return;
         }
@@ -25,13 +28,37 @@ const SignUp = () => {
             return;
         }
 
-        if (!password) {
-            setError("Please enter a password.");
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters.");
             return;
         }
 
-        setError("");
+        try {
+            setIsLoading(true);
+            setError("");
 
+            const res = await axios.post(
+                "http://localhost:8000/user/signup",
+                {
+                    fullName,
+                    email,
+                    password
+                }
+            );
+
+            // ✅ Save token & user
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
+
+            navigate("/dashboard");
+
+        } catch (err) {
+            setError(
+                err.response?.data?.message || "Something went wrong."
+            );
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -104,9 +131,21 @@ const SignUp = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full py-3 rounded-xl bg-linear-to-r from-purple-600 to-blue-500 text-white font-semibold shadow-lg hover:scale-[1.03] hover:shadow-purple-500/40 active:scale-[0.97] transition-all duration-200 cursor-pointer"
+                        disabled={isLoading}
+                        className={`w-full py-3 rounded-xl bg-linear-to-r from-purple-600 to-blue-500 text-white font-semibold shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${isLoading
+                            ? "opacity-80 cursor-not-allowed"
+                            : "hover:scale-[1.03] hover:shadow-purple-500/40 active:scale-[0.97]"
+                            }
+    `}
                     >
-                        Sign Up
+                        {isLoading ? (
+                            <>
+                                <Loader2 className="w-5 h-5 animate-spin" />
+                                Creating Account...
+                            </>
+                        ) : (
+                            "Sign Up"
+                        )}
                     </button>
 
                     {/* Divider */}

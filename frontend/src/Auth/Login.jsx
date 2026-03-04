@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../utils/helper.js";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import axios from "axios";
+import { Loader2 } from "lucide-react";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -24,8 +27,40 @@ const Login = () => {
             return;
         }
 
-        setError("");
-        navigate("/dashboard");
+        try {
+            setIsLoading(true);
+            setError("");
+
+            const res = await axios.post(
+                "http://localhost:8000/user/login",
+                { email, password }
+            );
+
+            // console.log("Login Response:", res.data);
+
+            const token = res.data.accessToken;
+            const user = res.data.user;
+
+            if (!token) {
+                throw new Error("Token not received");
+            }
+
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
+
+            // ✅ redirect after success
+            navigate("/dashboard", { replace: true });
+
+        } catch (err) {
+            // console.log("Login Error:", err.response?.data || err.message);
+            setError(
+                err.response?.data?.message ||
+                err.message ||
+                "Invalid email or password"
+            );
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -101,9 +136,21 @@ const Login = () => {
                     {/* Login Button */}
                     <button
                         type="submit"
-                        className="w-full py-3 rounded-xl bg-linear-to-r from-purple-600 to-blue-500 text-white font-semibold shadow-lg hover:scale-[1.03] hover:shadow-purple-500/40 active:scale-[0.97] transition-all duration-200 cursor-pointer"
+                        disabled={isLoading}
+                        className={`w-full py-3 rounded-xl bg-linear-to-r from-purple-600 to-blue-500 text-white font-semibold shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${isLoading
+                            ? "opacity-80 cursor-not-allowed"
+                            : "hover:scale-[1.03] hover:shadow-purple-500/40 active:scale-[0.97]"
+                            }
+    `}
                     >
-                        Log In
+                        {isLoading ? (
+                            <>
+                                <Loader2 className="w-5 h-5 animate-spin" />
+                                <span className="tracking-wide">Logging in...</span>
+                            </>
+                        ) : (
+                            "Log In"
+                        )}
                     </button>
 
                     {/* Divider */}

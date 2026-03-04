@@ -33,6 +33,11 @@ const ForgotPassword = () => {
             if (res.data.success) {
                 setIsSubmitted(true);
                 toast.success(res.data.message);
+
+                // ✅ 5 seconds ke baad OTP page open hoga
+                setTimeout(() => {
+                    navigate(`/verify-otp/${email}`);
+                }, 5000);
             }
 
         } catch (error) {
@@ -59,7 +64,7 @@ const ForgotPassword = () => {
                 </h2>
 
                 <p className="text-sm text-slate-400 text-center mt-2 mb-8">
-                    Enter your email to receive reset instructions
+                    Enter your email to receive a 6-digit OTP
                 </p>
 
                 {error && (
@@ -77,10 +82,10 @@ const ForgotPassword = () => {
 
                         <div className="space-y-2">
                             <h3 className="text-lg font-semibold text-white">
-                                Check your inbox 📬
+                                OTP Sent Successfully 🔐
                             </h3>
                             <p className="text-slate-400 text-sm">
-                                We’ve sent a reset link to
+                                We’ve sent a 6-digit OTP to
                             </p>
                             <p className="text-orange-400 font-medium">
                                 {email}
@@ -120,7 +125,7 @@ const ForgotPassword = () => {
                                     Sending...
                                 </span>
                             ) : (
-                                "Send Reset Link"
+                                "Send OTP"
                             )}
                         </button>
 
