@@ -1,11 +1,23 @@
-const express = require("express");
-const app = express();
-const port = 8080;
+import express from "express"
+import "dotenv/config"
+import connectDB from "./configs/db.js"
+import userRoute from "./routes/userRoute.js"
+import cors from "cors"
 
-app.get("/", (req, res) => {
-    res.send("hello smart ai planner");
+const app = express()
+
+// middlewares
+app.use(express.json())
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}))
+
+// routes
+app.use("/user", userRoute)
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => {
+    connectDB()
+    console.log(`Server is Running on PORT: ${PORT}`)
 })
-
-app.listen(port, () => {
-    console.log(`app is listening on port ${port}`);
-});
