@@ -38,7 +38,7 @@ const Login = () => {
 
             // console.log("Login Response:", res.data);
 
-            const token = res.data.accessToken;
+            const token = res.data.token;
             const user = res.data.user;
 
             if (!token) {
