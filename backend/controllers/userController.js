@@ -136,7 +136,7 @@ export const loginUser = async (req, res) => {
             });
         }
 
-        const accessToken = jwt.sign(
+        const token = jwt.sign(
             { id: user._id },
             process.env.SECRET_KEY,
             { expiresIn: "10d" }
@@ -146,13 +146,13 @@ export const loginUser = async (req, res) => {
         user.isLoggedIn = true;
 
         // ✅ SAVE TOKEN IN DB (optional but you want it)
-        user.accessToken = accessToken;
+        user.token = token;
 
         await user.save();
 
         return res.status(200).json({
             success: true,
-            accessToken,
+            token,
             user
         });
 
@@ -167,14 +167,38 @@ export const loginUser = async (req, res) => {
 
 export const logoutUser = async (req, res) => {
     try {
+
         const userId = req.userId
-        await Session.deleteMany({ userId })
-        await User.findByIdAndUpdate(userId, { isLoggedIn: false })
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized user"
+            })
+        }
+
+        const user = await User.findById(userId)
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+
+        // logout update
+        user.token = null
+        user.isLoggedIn = false
+
+        await user.save()
+
         return res.status(200).json({
             success: true,
-            message: "Logged Out Successfully"
+            message: "Logged out successfully"
         })
+
     } catch (error) {
+
         return res.status(500).json({
             success: false,
             message: error.message
