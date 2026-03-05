@@ -1,29 +1,25 @@
 import React, { useState } from "react";
-import {
-    LayoutDashboard,
-    CalendarCheck,
-    Brain,
-    BarChart3,
-    Settings,
-    LogOut,
-    Sparkles
-} from "lucide-react";
+import { LayoutDashboard, CalendarCheck, BarChart3, LogOut, Sparkles, CheckSquare, Timer, Bot, BookOpen } from "lucide-react";
 
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext.jsx";
 
 import StudyPlanner from "../pages/StudyPlanner.jsx";
-import AIInsights from "../pages/AIInsights.jsx";
 import Analytics from "../pages/Analytics.jsx";
 import DashboardHome from "../pages/DashboardHome.jsx";
-import SettingsPage from "../pages/Settings.jsx";
+import AIAssistant from "../pages/AIAssistant.jsx";
+import Tasks from "../pages/Tasks.jsx";
+import FocusMode from "../pages/FocusMode.jsx";
+import Notes from "../pages/Notes.jsx";
 
 const TABS = [
     { id: "dashboard", name: "Dashboard", icon: LayoutDashboard },
     { id: "planner", name: "Study Planner", icon: CalendarCheck },
-    { id: "insights", name: "AI Insights", icon: Brain },
+    { id: "tasks", name: "Tasks", icon: CheckSquare },
+    { id: "focus", name: "Focus Mode", icon: Timer },
+    { id: "ai", name: "AI Assistant", icon: Bot },
+    { id: "notes", name: "Notes", icon: BookOpen },
     { id: "analytics", name: "Analytics", icon: BarChart3 },
-    { id: "settings", name: "Settings", icon: Settings },
 ];
 
 const DashboardLayout = () => {
@@ -39,27 +35,27 @@ const DashboardLayout = () => {
     };
 
     const renderContent = () => {
-
         const components = {
             dashboard: <DashboardHome />,
             planner: <StudyPlanner />,
-            insights: <AIInsights />,
+            tasks: <Tasks />,
+            focus: <FocusMode />,
+            ai: <AIAssistant />,   // FIXED
+            notes: <Notes />,
             analytics: <Analytics />,
-            settings: <SettingsPage />,
         };
-
         return components[activeTab] || null;
     };
 
     return (
-        <div className="relative min-h-screen bg-[#0B0F1A] flex overflow-hidden">
+        <div className="relative min-h-screen bg-[#0B0F1A] overflow-hidden">
 
             {/* Background blobs */}
             <div className="absolute -top-40 -left-40 w-112.5 h-112.5 bg-orange-500 opacity-20 blur-[160px] rounded-full"></div>
             <div className="absolute -bottom-40 -right-40 w-112.5 h-112.5 bg-purple-600 opacity-20 blur-[160px] rounded-full"></div>
 
             {/* SIDEBAR */}
-            <aside className="relative z-10 w-64 p-6 backdrop-blur-2xl bg-white/5 border-r border-white/10 shadow-[0_0_40px_rgba(168,85,247,0.15)] flex flex-col">
+            <aside className="fixed left-0 top-0 h-screen w-64 p-6 backdrop-blur-2xl bg-white/5 border-r border-white/10 shadow-[0_0_40px_rgba(168,85,247,0.15)] flex flex-col z-20">
 
                 {/* Logo */}
                 <div className="flex items-center gap-3 mb-12">
@@ -127,7 +123,7 @@ const DashboardLayout = () => {
             </aside>
 
             {/* MAIN CONTENT */}
-            <main className="relative z-10 flex-1 p-10 overflow-y-auto">
+            <main className="relative z-10 flex-1 p-10 overflow-y-auto ml-64">
 
                 {/* Header */}
                 <div className="mb-8">
