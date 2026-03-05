@@ -1,6 +1,7 @@
 import express from "express"
 import "dotenv/config"
 import connectDB from "./configs/db.js"
+import notesRoutes from "./routes/noteRoute.js";
 import userRoute from "./routes/userRoute.js"
 import cors from "cors"
 
@@ -15,6 +16,7 @@ app.use(cors({
 
 // routes
 app.use("/user", userRoute)
+app.use("/api/notes", notesRoutes);
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
