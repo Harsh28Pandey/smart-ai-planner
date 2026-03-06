@@ -38,7 +38,7 @@ const SignUp = () => {
             setError("");
 
             const res = await axios.post(
-                "http://localhost:8000/user/signup",
+                "http://localhost:8000/user/register",
                 {
                     fullName,
                     email,
