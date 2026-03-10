@@ -26,7 +26,10 @@ export const verifyMail = async (token, email) => {
         }
     })
     const mailConfigurations = {
-        from: process.env.MAIL_USER,
+        from: {
+            name: "Study Planner Verification",
+            address: process.env.MAIL_USER
+        },
         to: email,
         subject: "Email Verification",
         html: htmlToSend,
