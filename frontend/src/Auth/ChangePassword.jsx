@@ -108,7 +108,7 @@ const ChangePassword = () => {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-3.5 text-slate-400 hover:text-white"
+                                className="absolute right-3 top-3.5 text-slate-400 hover:text-white cursor-pointer"
                             >
                                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
@@ -127,7 +127,7 @@ const ChangePassword = () => {
                             <button
                                 type="button"
                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                className="absolute right-3 top-3.5 text-slate-400 hover:text-white"
+                                className="absolute right-3 top-3.5 text-slate-400 hover:text-white cursor-pointer"
                             >
                                 {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>

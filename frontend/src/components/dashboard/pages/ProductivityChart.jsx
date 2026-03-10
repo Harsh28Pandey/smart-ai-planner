@@ -5,5 +5,5 @@ const ProductivityChart = () => {
         <div>ProductivityChart</div>
     )
 }
-
+ 
 export default ProductivityChart

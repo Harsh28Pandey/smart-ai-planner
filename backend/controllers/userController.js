@@ -4,6 +4,11 @@ import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
+/**
+ * @route registerUser
+ * @description Register a new user
+ * @access Public
+*/
 export const registerUser = async (req, res) => {
     try {
         const { username, email, password } = req.body
@@ -48,6 +53,11 @@ export const registerUser = async (req, res) => {
     }
 }
 
+/**
+ * @route verification
+ * @description Verification of a new user through email
+ * @access Private
+*/
 export const verification = async (req, res) => {
     try {
         const authHeader = req.headers.authorization
@@ -100,6 +110,11 @@ export const verification = async (req, res) => {
     }
 }
 
+/**
+ * @route loginUser
+ * @description Login a user with email and password
+ * @access Public
+*/
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -136,7 +151,7 @@ export const loginUser = async (req, res) => {
             });
         }
 
-        const accessToken = jwt.sign(
+        const token = jwt.sign(
             { id: user._id },
             process.env.SECRET_KEY,
             { expiresIn: "10d" }
@@ -146,13 +161,13 @@ export const loginUser = async (req, res) => {
         user.isLoggedIn = true;
 
         // ✅ SAVE TOKEN IN DB (optional but you want it)
-        user.accessToken = accessToken;
+        user.token = token;
 
         await user.save();
 
         return res.status(200).json({
             success: true,
-            accessToken,
+            token,
             user
         });
 
@@ -165,16 +180,45 @@ export const loginUser = async (req, res) => {
     }
 };
 
+/**
+ * @route logoutUser
+ * @description Logout a existing user
+ * @access Public
+*/
 export const logoutUser = async (req, res) => {
     try {
+
         const userId = req.userId
-        await Session.deleteMany({ userId })
-        await User.findByIdAndUpdate(userId, { isLoggedIn: false })
+
+        if (!userId) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized user"
+            })
+        }
+
+        const user = await User.findById(userId)
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            })
+        }
+
+        // logout update
+        user.token = null
+        user.isLoggedIn = false
+
+        await user.save()
+
         return res.status(200).json({
             success: true,
-            message: "Logged Out Successfully"
+            message: "Logged out successfully"
         })
+
     } catch (error) {
+
         return res.status(500).json({
             success: false,
             message: error.message
@@ -182,6 +226,11 @@ export const logoutUser = async (req, res) => {
     }
 }
 
+/**
+ * @route forgotPassword
+ * @description Forgot your password through otp sending on your email
+ * @access Private
+*/
 export const forgotPassword = async (req, res) => {
     try {
         const { email } = req.body
@@ -213,6 +262,11 @@ export const forgotPassword = async (req, res) => {
     }
 }
 
+/**
+ * @route verifyOTP
+ * @description Verify otp sending on your email
+ * @access Private
+*/
 export const verifyOTP = async (req, res) => {
     const { otp } = req.body
     const email = req.params.email
@@ -270,6 +324,11 @@ export const verifyOTP = async (req, res) => {
     }
 }
 
+/**
+ * @route changePassword
+ * @description Change your password before entering your otp
+ * @access Private
+*/
 export const changePassword = async (req, res) => {
     const { newPassword, confirmPassword } = req.body
     const email = req.params.email

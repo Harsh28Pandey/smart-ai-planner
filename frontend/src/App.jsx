@@ -17,6 +17,8 @@ import Verify from "./Auth/Verify.jsx";
 
 import UserProvider from "./context/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoutes.jsx";
+import Dashboard from "./components/dashboard/layout/Dashboard.jsx";
+import DashboardLayout from "./components/dashboard/layout/DashboardLayout.jsx";
 
 const AppLayout = () => {
     const location = useLocation();
@@ -28,6 +30,7 @@ const AppLayout = () => {
         "/verify",
         "/verify-otp",
         "/change-password",
+        "/dashboard"
     ];
 
     const shouldHideNavbar = hideNavbarRoutes.some((route) =>
@@ -63,7 +66,7 @@ const AppLayout = () => {
                     path="/dashboard"
                     element={
                         <ProtectedRoute>
-                            {/* <Dashboard /> */}
+                            <DashboardLayout />
                         </ProtectedRoute>
                     }
                 />

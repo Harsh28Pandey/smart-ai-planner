@@ -1,51 +1,35 @@
-import React, { createContext, useState } from "react";
-// import axiosInstance from "../utils/axiosInstance.js";
-// import { API_PATHS } from "../utils/constants";
+import React, { createContext, useState, useContext } from "react";
 
 export const UserContext = createContext(null);
 
+export const useAuth = () => {
+    return useContext(UserContext);
+};
+
 const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    // const [loading, setLoading] = useState(true);
 
-    // const token = localStorage.getItem("token");
+    const [user, setUser] = useState(
+        JSON.parse(localStorage.getItem("user")) || null
+    );
 
-    // 🔹 Fetch Logged In User
-    // const fetchUser = useCallback(async () => {
-    //     try {
-    //         const res = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);
-    //         setUser(res.data);
-    //     } catch (error) {
-    //         console.error("Authentication Failed:", error);
-    //         clearUser();
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // }, []);
-
-    // 🔹 On Mount
-    // useEffect(() => {
-    //     if (!token) {
-    //         setLoading(false);
-    //         return;
-    //     }
-    //     fetchUser();
-    // }, [token, fetchUser]);
-
-    // 🔹 Login / Signup Success
+    // LOGIN / SIGNUP SUCCESS
     const updateUser = (data) => {
-        if (!data?.token) {
+
+        if (!data?.accessToken) {
             console.error("Token missing in updateUser");
             return;
         }
 
-        localStorage.setItem("token", data.token);
-        setUser(data.user); // assuming backend sends { user, token }
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        setUser(data.user);
     };
 
-    // 🔹 Logout
-    const clearUser = () => {
+    // LOGOUT
+    const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setUser(null);
     };
 
@@ -55,10 +39,9 @@ const UserProvider = ({ children }) => {
         <UserContext.Provider
             value={{
                 user,
-                // loading,
                 isAuthenticated,
                 updateUser,
-                clearUser,
+                logout
             }}
         >
             {children}
