@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
 import { validateEmail } from '../utils/helper.js'
-import axios from "axios";
 import { Loader2 } from "lucide-react";
+import axiosInstance from "../utils/axiosInstance.js";
 
 const SignUp = () => {
     const [fullName, setFullName] = useState("");
@@ -37,20 +37,20 @@ const SignUp = () => {
             setIsLoading(true);
             setError("");
 
-            const res = await axios.post(
-                "http://localhost:8000/user/register",
-                {
-                    fullName,
-                    email,
-                    password
-                }
+            const response = await axiosInstance.post("/user/register", {
+                username: fullName,
+                email,
+                password
+            }
             );
 
             // ✅ Save token & user
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("user", JSON.stringify(res.data.user));
+            // localStorage.setItem("token", res.data.token);
+            // localStorage.setItem("user", JSON.stringify(res.data.user));
 
-            navigate("/dashboard");
+            localStorage.setItem("token", response.data.token)
+            // updateUser(response.data)
+            navigate("/verify")
 
         } catch (err) {
             setError(
