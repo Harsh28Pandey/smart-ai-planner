@@ -11,7 +11,7 @@ const StatCard = ({ icon: Icon, title, value, subtitle }) => {
                     <h3 className="text-2xl font-bold text-white mt-1">{value}</h3>
                     <p className="text-xs text-slate-500 mt-1">{subtitle}</p>
                 </div>
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center">
+                <div className="h-12 w-12 rounded-xl bg-linear-to-br from-purple-600 to-blue-500 flex items-center justify-center">
                     <Icon className="text-white h-6 w-6" />
                 </div>
             </div>

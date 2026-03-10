@@ -11,20 +11,24 @@ import AIAssistant from "../pages/AIAssistant.jsx";
 import Tasks from "../pages/Tasks.jsx";
 import FocusMode from "../pages/FocusMode.jsx";
 import Notes from "../pages/Notes.jsx";
+import DashboardNavbarLayout from "./DashboardNavbarLayout.jsx";
 
 const TABS = [
-    { id: "dashboard", name: "Dashboard", icon: LayoutDashboard },
-    { id: "planner", name: "Study Planner", icon: CalendarCheck },
-    { id: "tasks", name: "Tasks", icon: CheckSquare },
-    { id: "focus", name: "Focus Mode", icon: Timer },
-    { id: "ai", name: "AI Assistant", icon: Bot },
-    { id: "notes", name: "Notes", icon: BookOpen },
-    { id: "analytics", name: "Analytics", icon: BarChart3 },
+    { id: "dashboard", name: "Dashboard", icon: LayoutDashboard, description: "Track your productivity and study insights." },
+    { id: "planner", name: "Study Planner", icon: CalendarCheck, description: "Plan your daily and weekly study schedule." },
+    { id: "tasks", name: "Tasks", icon: CheckSquare, description: "Manage and complete your study tasks." },
+    { id: "focus", name: "Focus Mode", icon: Timer, description: "Stay focused with distraction free study sessions." },
+    { id: "ai", name: "AI Assistant", icon: Bot, description: "Get AI help for coding, learning and study plans." },
+    { id: "notes", name: "Notes", icon: BookOpen, description: "Create and manage your personal study notes." },
+    { id: "analytics", name: "Analytics", icon: BarChart3, description: "Analyze your study performance and productivity." },
 ];
 
 const DashboardLayout = () => {
 
     const [activeTab, setActiveTab] = useState("dashboard");
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const currentTab = TABS.find(tab => tab.id === activeTab);
 
     const navigate = useNavigate();
     const { logout } = useAuth();
@@ -125,18 +129,8 @@ const DashboardLayout = () => {
             {/* MAIN CONTENT */}
             <main className="relative z-10 flex-1 p-10 overflow-y-auto ml-64">
 
-                {/* Header */}
-                <div className="mb-8">
-
-                    <h1 className="text-2xl font-bold text-white capitalize">
-                        {activeTab}
-                    </h1>
-
-                    <p className="text-slate-400 mt-1">
-                        Manage your {activeTab} efficiently with AI assistance.
-                    </p>
-
-                </div>
+                {/* Dashboard navbar with small description */}
+                <DashboardNavbarLayout title={currentTab?.name} description={currentTab?.description} user={user} />
 
                 {/* Content Container */}
                 <div className="p-8 rounded-2xl backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.15)] min-h-112.5">
