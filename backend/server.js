@@ -7,18 +7,20 @@ import cors from "cors"
 
 const app = express()
 
-// middlewares
+//* middlewares
 app.use(express.json())
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true
 }))
 
-// routes
+//* routes
 app.use("/user", userRoute)
 app.use("/api/notes", notesRoutes);
 
 const PORT = process.env.PORT || 3000
+
+//* server starting
 app.listen(PORT, () => {
     connectDB()
     console.log(`Server is Running on PORT: ${PORT}`)
