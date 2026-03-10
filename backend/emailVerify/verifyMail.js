@@ -36,7 +36,7 @@ export const verifyMail = async (token, email) => {
         if (error) {
             throw new Error(error)
         }
-        // console.log("Email sent successfully")
+        console.log("Email sent successfully")
         // console.log(info)
     })
 }
