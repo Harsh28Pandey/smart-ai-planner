@@ -63,7 +63,7 @@ const AppLayout = () => {
 
                 {/* Protected Page */}
                 <Route
-                    path="/dashboard"
+                    path="/dashboard/*"
                     element={
                         <ProtectedRoute>
                             <DashboardLayout />

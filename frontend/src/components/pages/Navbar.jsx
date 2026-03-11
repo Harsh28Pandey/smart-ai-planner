@@ -98,15 +98,15 @@ const Navbar = () => {
                                     Dashboard
                                 </button>
 
-                                <button onClick={() => navigate("/notes")} className="w-full text-left px-5 py-3 text-slate-300 hover:text-white hover:bg-white/5 hover:rounded-2xl transition-all duration-200 cursor-pointer">
+                                <button onClick={() => navigate("/dashboard/notes")} className="w-full text-left px-5 py-3 text-slate-300 hover:text-white hover:bg-white/5 hover:rounded-2xl transition-all duration-200 cursor-pointer">
                                     Notes
                                 </button>
 
-                                <button onClick={() => navigate("/ai-assistant")} className="w-full text-left px-5 py-3 text-slate-300 hover:text-white hover:bg-white/5 hover:rounded-2xl transition-all duration-200 cursor-pointer">
+                                <button onClick={() => navigate("/dashboard/ai")} className="w-full text-left px-5 py-3 text-slate-300 hover:text-white hover:bg-white/5 hover:rounded-2xl transition-all duration-200 cursor-pointer">
                                     AI Assistant
                                 </button>
 
-                                <button onClick={() => navigate("/interview-prep")} className="w-full text-left px-5 py-3 text-slate-300 hover:text-white hover:bg-white/5 hover:rounded-2xl transition-all duration-200 cursor-pointer">
+                                <button onClick={() => navigate("dashboard/interview")} className="w-full text-left px-5 py-3 text-slate-300 hover:text-white hover:bg-white/5 hover:rounded-2xl transition-all duration-200 cursor-pointer">
                                     Interview Prep
                                 </button>
 

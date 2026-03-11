@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { LayoutDashboard, CalendarCheck, BarChart3, LogOut, Sparkles, CheckSquare, Timer, Bot, BookOpen } from "lucide-react";
-
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { LayoutDashboard, CalendarCheck, BarChart3, LogOut, Sparkles, CheckSquare, Timer, Bot, BookOpen, Brain } from "lucide-react";
+import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext.jsx";
 
 import StudyPlanner from "../pages/StudyPlanner.jsx";
@@ -12,6 +11,7 @@ import Tasks from "../pages/Tasks.jsx";
 import FocusMode from "../pages/FocusMode.jsx";
 import Notes from "../pages/Notes.jsx";
 import DashboardNavbarLayout from "./DashboardNavbarLayout.jsx";
+import Interview from "../pages/Interview.jsx";
 
 const TABS = [
     { id: "dashboard", name: "Dashboard", icon: LayoutDashboard, description: "Track your productivity and study insights." },
@@ -20,12 +20,14 @@ const TABS = [
     { id: "focus", name: "Focus Mode", icon: Timer, description: "Stay focused with distraction free study sessions." },
     { id: "ai", name: "AI Assistant", icon: Bot, description: "Get AI help for coding, learning and study plans." },
     { id: "notes", name: "Notes", icon: BookOpen, description: "Create and manage your personal study notes." },
+    { id: "interview", name: "Interview Prep", icon: Brain, description: "Practice coding questions, mock interviews and prepare for placements." },
     { id: "analytics", name: "Analytics", icon: BarChart3, description: "Analyze your study performance and productivity." },
 ];
 
 const DashboardLayout = () => {
 
-    const [activeTab, setActiveTab] = useState("dashboard");
+    const location = useLocation();
+    const activeTab = location.pathname.split("/")[2] || "dashboard";
     const user = JSON.parse(localStorage.getItem("user"));
 
     const currentTab = TABS.find(tab => tab.id === activeTab);
@@ -36,19 +38,6 @@ const DashboardLayout = () => {
     const handleLogout = () => {
         logout();
         navigate("/login");
-    };
-
-    const renderContent = () => {
-        const components = {
-            dashboard: <DashboardHome />,
-            planner: <StudyPlanner />,
-            tasks: <Tasks />,
-            focus: <FocusMode />,
-            ai: <AIAssistant />,   // FIXED
-            notes: <Notes />,
-            analytics: <Analytics />,
-        };
-        return components[activeTab] || null;
     };
 
     return (
@@ -83,7 +72,7 @@ const DashboardLayout = () => {
                         return (
                             <button
                                 key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
+                                onClick={() => navigate(`/dashboard/${tab.id}`)}
                                 className={`cursor-pointer flex items-center gap-3 px-4 py-3 rounded-xl
                                 transition-all duration-300 ease-in-out transform hover:scale-[1.04]
                                 ${isActive
@@ -135,7 +124,17 @@ const DashboardLayout = () => {
                 {/* Content Container */}
                 <div className="p-8 rounded-2xl backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.15)] min-h-112.5">
 
-                    {renderContent()}
+                    <Routes>
+                        <Route index element={<DashboardHome />} />
+                        <Route path="dashboard" element={<DashboardHome />} />
+                        <Route path="planner" element={<StudyPlanner />} />
+                        <Route path="tasks" element={<Tasks />} />
+                        <Route path="focus" element={<FocusMode />} />
+                        <Route path="ai" element={<AIAssistant />} />
+                        <Route path="notes" element={<Notes />} />
+                        <Route path="interview" element={<Interview />} />
+                        <Route path="analytics" element={<Analytics />} />
+                    </Routes>
 
                 </div>
 
