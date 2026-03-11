@@ -6,104 +6,53 @@ Unlike traditional planners, this system analyzes **study behavior, productivity
 
 ---
 
-## 🎯 Problem Statement
+## 🎯 Problem
 
 Many students struggle with:
 
-- Creating **unrealistic study schedules**
-- **Overplanning** or **no planning**
-- Lack of **consistency**
-- **Burnout** during exam preparation
+- Unrealistic study schedules
+- Lack of consistency
+- Overplanning or no planning
+- Burnout during exam preparation
 
-This project focuses on one key idea:
+Traditional timetable apps create **static plans** that fail when students miss tasks.
 
-> **Not a perfect plan — a sustainable plan.**
+---
+
+## 💡 Solution
+
+**AI Study Planner** solves this by generating **adaptive and personalized study schedules** based on:
+
+- Exam deadline
+- Subjects and difficulty level
+- Daily available study hours
+- User productivity patterns
+
+Instead of fixed timetables, the system **dynamically adjusts the study plan** based on user progress and behavior.
 
 ---
 
 # 🧠 Core Features
 
-## 🤖 AI Personalized Study Planner
+### 🤖 AI Personalized Study Planner
 
-The system generates a personalized study schedule based on:
+Creates a customized daily study schedule using exam date, subjects, skill level, and available hours.
 
-- Exam Date
-- Subjects & Topics
-- User Skill Level (Beginner / Intermediate / Advanced)
-- Daily Available Study Hours
-- Energy Peak Time (Morning / Night)
-- Distraction Level
+### 🔄 Adaptive Rescheduling
 
-Example AI Output:
+Automatically adjusts the schedule when tasks are skipped or partially completed.
 
-- Weak subject → **More daily study time**
-- Medium subject → **Alternate day schedule**
-- Weekly **revision cycles**
+### 😵 Burnout Detection
 
----
+Tracks study patterns and suggests lighter schedules or recovery days when burnout risk increases.
 
-## 🔄 Adaptive Rescheduling
+### 🍅 Pomodoro AI Focus Coach
 
-If a user:
+Monitors focus sessions and suggests optimal study and break durations.
 
-- Completes only **partial tasks**
-- Skips multiple days
-- Falls behind schedule
+### 📈 Focus Score Prediction
 
-The system automatically:
-
-- Recalculates the study plan
-- Prioritizes weak subjects
-- Adjusts schedule realistically
-
-This ensures the system behaves like a **dynamic planner instead of a static timetable**.
-
----
-
-## 😵 Burnout Detection
-
-The system monitors:
-
-- Consecutive study hours
-- Task completion percentage
-- Late-night study sessions
-- Daily mood input
-
-If burnout risk increases, the system will:
-
-- Suggest lighter schedules
-- Insert recovery days
-- Provide motivational suggestions
-
----
-
-## 🍅 Pomodoro AI Focus Coach
-
-Smart Pomodoro system that tracks:
-
-- Session completion
-- Focus drop by subject
-- Productivity time patterns
-
-Example suggestions:
-
-- _"You focus better at 8PM."_
-- _"After 3 sessions, take a longer break."_
-
----
-
-## 📈 Focus Score Prediction
-
-Daily **Focus Score (0 – 100)** is calculated using:
-
-- Task completion percentage
-- Pomodoro success rate
-- Mood logs
-- Distraction reports
-
-Displayed via **analytics dashboards and charts**.
-
----
+Generates a daily **Focus Score (0–100)** based on productivity, task completion, and study consistency.
 
 # 🏗 Tech Stack
 
@@ -138,6 +87,8 @@ Hybrid AI System
 
 - Rule-based scheduling engine
 - LLM-powered suggestions
+
+---
 
 # 📸 Application Screenshots
 
