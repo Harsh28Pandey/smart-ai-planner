@@ -38,21 +38,31 @@ Instead of fixed timetables, the system **dynamically adjusts the study plan** b
 
 Creates a customized daily study schedule using exam date, subjects, skill level, and available hours.
 
+---
+
 ### 🔄 Adaptive Rescheduling
 
 Automatically adjusts the schedule when tasks are skipped or partially completed.
+
+---
 
 ### 😵 Burnout Detection
 
 Tracks study patterns and suggests lighter schedules or recovery days when burnout risk increases.
 
+---
+
 ### 🍅 Pomodoro AI Focus Coach
 
 Monitors focus sessions and suggests optimal study and break durations.
 
+---
+
 ### 📈 Focus Score Prediction
 
 Generates a daily **Focus Score (0–100)** based on productivity, task completion, and study consistency.
+
+---
 
 # 🏗 Tech Stack
 
