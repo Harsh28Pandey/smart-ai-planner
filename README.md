@@ -64,6 +64,25 @@ Generates a daily **Focus Score (0–100)** based on productivity, task completi
 
 ---
 
+# 🔐 Authentication & Security Features
+
+- **Email Verification on Signup**  
+  A verification email is automatically sent when a user creates an account.
+
+- **Account Activation Required**  
+  Users can **log in only after verifying their email**.
+
+- **Secure Password Encryption**  
+  User passwords are securely stored using hashing.
+
+- **OTP-based Password Reset**  
+  Users must verify an **OTP sent to their email** before changing their password.
+
+- **Protected Routes**  
+  Dashboard and study planner features are accessible only to authenticated users.
+
+---
+
 # 🏗 Tech Stack
 
 ## 🎨 Frontend
