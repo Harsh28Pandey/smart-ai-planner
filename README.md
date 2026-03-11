@@ -137,7 +137,7 @@ Hybrid AI architecture:
 
 Shows the landing page introducing the AI Study Planner, key features, and call-to-action.
 
-![Home Page](docs/screenshots/home.png)
+![Home Page](Docs/screenshots/home.png)
 
 ---
 
@@ -151,7 +151,7 @@ Secure authentication system for user account access and registration.
 
 Allows existing users to securely log into the platform.
 
-![Login Page](docs/screenshots/login.png)
+![Login Page](Docs/screenshots/login.png)
 
 ---
 
@@ -159,7 +159,7 @@ Allows existing users to securely log into the platform.
 
 New users can create an account to start planning their study schedule.
 
-![Sign Up Page](docs/screenshots/signup.png)
+![Sign Up Page](Docs/screenshots/signup.png)
 
 <!--
 ## 📊 Dashboard Overview
