@@ -48,8 +48,8 @@ const Home = () => {
                     <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
                         <button className="px-10 py-4 rounded-2xl bg-linear-to-r from-orange-500 via-purple-500 to-blue-500 
                           hover:scale-110 transition-all duration-300 shadow-xl cursor-pointer group relative overflow-hidden"
-                          onClick={() => navigate("/signup")}
-                          >
+                            onClick={() => navigate("/signup")}
+                        >
                             <span>Start Planning</span>
                             <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </button>
@@ -101,7 +101,7 @@ const Home = () => {
                             <div
                                 key={i}
                                 className="p-10 rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10
-                      hover:-translate-y-3 hover:shadow-2xl transition-all duration-500
+                      hover:-translate-y-0.5 hover:shadow-2xl transition-all duration-500
                       reveal opacity-0 translate-y-10 cursor-pointer group relative overflow-hidden"
                             >
                                 <div className="absolute inset-0 bg-linear-to-br from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -177,9 +177,9 @@ const Home = () => {
                     </h3>
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
-                            { quote: "Doubled my productivity overnight. Finally got an A in calculus!", name: "Priya S.", role: "IIT Delhi" },
-                            { quote: "The AI actually understands my schedule. Game changer!", name: "Rahul K.", role: "JEE Aspirant" },
-                            { quote: "Stress-free exams. My planner knows me better than I do.", name: "Ananya M.", role: "NEET Topper" }
+                            { quote: "Finally managed my assignments and exams without last-minute panic. My GPA actually improved!", name: "Priya Sharma", role: "2nd Year B.Tech Student" },
+                            { quote: "The planner adjusts perfectly with my classes and study time. I feel way more productive now.", name: "Rahul Kumar", role: "Computer Science Student" },
+                            { quote: "Balancing college, projects, and self-study used to be stressful. Now everything is organized.", name: "Aditya Mishra", role: "Engineering Student" }
                         ].map((testimonial, i) => (
                             <div key={i} className="p-8 rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 hover:shadow-2xl transition-all duration-500 reveal opacity-0 translate-y-10">
                                 <p className="text-gray-300 mb-6 italic">"{testimonial.quote}"</p>

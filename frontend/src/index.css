@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .custom-scroll::-webkit-scrollbar {
-    width: 6px;
+    width: 2px;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
@@ -11,4 +11,32 @@
 
 .custom-scroll::-webkit-scrollbar-track {
     background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a855f7;
+    border-radius: 10px;
+}
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+    background: #0f0f0f;
+    /* optional background */
+}
+
+/* Scrollbar handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #a855f7, #7c3aed);
+    /* purple gradient */
+    border-radius: 10px;
+}
+
+/* Hover effect */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #9333ea, #6d28d9);
 }
