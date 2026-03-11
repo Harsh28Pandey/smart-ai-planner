@@ -34,7 +34,7 @@ Instead of fixed timetables, the system **dynamically adjusts the study plan** b
 
 # 🧠 Core Features
 
-### 🤖 AI Personalized Study Planner
+## 🤖 AI Personalized Study Planner
 
 Creates a customized daily study schedule using exam date, subjects, skill level, and available hours.
 
