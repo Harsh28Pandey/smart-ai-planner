@@ -107,29 +107,37 @@ Displayed via **analytics dashboards and charts**.
 
 # 🏗 Tech Stack
 
-## Frontend
+## 🎨 Frontend
 
-- React
-- Vite
-- Tailwind CSS
-
-## Backend
-
-- Node.js
-- Express.js
-
-## Database
-
-- MongoDB
-
-## AI System
-
-Hybrid AI architecture:
-
-- Rule-based scheduling engine
-- LLM-based suggestions (OpenAI / Gemini)
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
 ---
+
+## ⚙️ Backend
+
+[![NodeJS](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![ExpressJS](https://img.shields.io/badge/Express.js-000000?logo=express&logoColor=white)](https://expressjs.com)
+
+---
+
+## 🗄 Database
+
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white)](https://mongodb.com)
+
+---
+
+## 🤖 AI System
+
+[![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white)](https://openai.com)
+[![Gemini](https://img.shields.io/badge/Gemini-AI-blue)](https://deepmind.google/technologies/gemini)
+
+**Architecture:**  
+Hybrid AI System
+
+- Rule-based scheduling engine
+- LLM-powered suggestions
 
 # 📸 Application Screenshots
 
