@@ -4,6 +4,7 @@ import connectDB from "./configs/db.js"
 import notesRoutes from "./routes/noteRoute.js";
 import userRoute from "./routes/userRoute.js"
 import cors from "cors"
+import path from "path"
 
 const app = express()
 
@@ -17,6 +18,10 @@ app.use(cors({
 //* routes
 app.use("/user", userRoute)
 app.use("/api/notes", notesRoutes);
+
+app.use("/uploads", express.static("uploads"))
+// Serve uploads folder
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")))
 
 const PORT = process.env.PORT || 3000
 

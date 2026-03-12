@@ -11,7 +11,7 @@ import jwt from "jsonwebtoken"
 */
 export const registerUser = async (req, res) => {
     try {
-        const { username, email, password } = req.body
+        const { username, email, password, profileImageUrl } = req.body
         if (!username || !email || !password) {
             return res.status(400).json({
                 success: false,
@@ -32,7 +32,8 @@ export const registerUser = async (req, res) => {
         const newUser = await User.create({
             username,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            profileImageUrl
         })
 
         const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, { expiresIn: '10m' })

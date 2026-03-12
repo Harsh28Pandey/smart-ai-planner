@@ -33,7 +33,11 @@ const userSchema = new mongoose.Schema({
     otpExpiry: {
         type: Date,
         default: null
-    }
+    },
+    profileImageUrl: {
+        type: String,
+        default: null
+    },
 }, { timestamps: true })
 
 const User = mongoose.model("User", userSchema)
