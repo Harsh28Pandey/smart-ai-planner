@@ -67,9 +67,9 @@ const Navbar = () => {
                             {/* Profile Circle */}
                             <div className="w-9 h-9 rounded-full overflow-hidden border border-white/20">
 
-                                {user.profileImage ? (
+                                {user.profileImageUrl ? (
                                     <img
-                                        src={user.profileImage}
+                                        src={user.profileImageUrl}
                                         alt="profile"
                                         className="w-full h-full object-cover"
                                     />

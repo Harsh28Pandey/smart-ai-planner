@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../../utils/axiosInstance.js";
 
 const DashboardNavbarLayout = ({ title, description, user }) => {
 
@@ -7,12 +8,20 @@ const DashboardNavbarLayout = ({ title, description, user }) => {
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        navigate("/");
-    };
+    const handleLogout = async () => {
+        try {
 
+            await axiosInstance.post("/user/logout");
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            navigate("/");
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -50,8 +59,8 @@ const DashboardNavbarLayout = ({ title, description, user }) => {
                 >
 
                     <div className="w-9 h-9 rounded-full overflow-hidden border border-white/20">
-                        {user?.profileImage ? (
-                            <img src={user.profileImage} className="w-full h-full object-cover" />
+                        {user?.profileImageUrl ? (
+                            <img src={user.profileImageUrl} className="w-full h-full object-cover" />
                         ) : (
                             <div className="w-full h-full flex items-center justify-center bg-linear-to-r from-purple-500 to-blue-500 text-white font-semibold">
                                 {user?.username?.charAt(0)}

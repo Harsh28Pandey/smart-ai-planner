@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
-import { validateEmail } from '../utils/helper.js'
+import { validateEmail } from "../utils/helper.js";
 import { Loader2 } from "lucide-react";
 import axiosInstance from "../utils/axiosInstance.js";
+import uploadImage from "../utils/uploadImage.js";
+import ProfilePhotoSelector from "../Auth/ProfilePhotoSelector.jsx";
 
 const SignUp = () => {
+    const [profilePic, setProfilePic] = useState(null);
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -37,20 +40,25 @@ const SignUp = () => {
             setIsLoading(true);
             setError("");
 
+            let profileImageUrl = "";
+
+            // Upload Image
+            if (profilePic) {
+                const imgUploadRes = await uploadImage(profilePic);
+                profileImageUrl = imgUploadRes.imageUrl || "";
+            }
+
             const response = await axiosInstance.post("/user/register", {
                 username: fullName,
                 email,
-                password
-            }
-            );
+                password,
+                profileImageUrl: profileImageUrl
+            });
 
-            // ✅ Save token & user
-            // localStorage.setItem("token", res.data.token);
-            // localStorage.setItem("user", JSON.stringify(res.data.user));
+            // localStorage.setItem("token", response.data.token);
+            localStorage.setItem("token", response.data.data.token);
 
-            localStorage.setItem("token", response.data.token)
-            // updateUser(response.data)
-            navigate("/verify")
+            navigate("/verify");
 
         } catch (err) {
             setError(
@@ -68,15 +76,23 @@ const SignUp = () => {
             <div className="absolute -top-32 -left-32 w-105 h-105 bg-orange-500 opacity-25 blur-[130px] rounded-full"></div>
             <div className="absolute -bottom-32 -right-32 w-105 h-105 bg-purple-600 opacity-25 blur-[130px] rounded-full"></div>
 
-            {/* Glass Card */}
             <div className="relative w-full max-w-md p-8 rounded-3xl backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_0_40px_rgba(168,85,247,0.15)]">
 
                 <h2 className="text-3xl font-bold text-white text-center">
                     Create Account 🚀
                 </h2>
-                <p className="text-sm text-slate-400 text-center mt-2 mb-8">
+
+                <p className="text-sm text-slate-400 text-center mt-2 mb-6">
                     Join AI Study Planner and start your smart journey
                 </p>
+
+                {/* Profile Image Selector */}
+                <div className="flex justify-center mb-6">
+                    <ProfilePhotoSelector
+                        image={profilePic}
+                        setImage={setProfilePic}
+                    />
+                </div>
 
                 <form onSubmit={handleSignUp} className="space-y-6">
 
@@ -135,8 +151,7 @@ const SignUp = () => {
                         className={`w-full py-3 rounded-xl bg-linear-to-r from-purple-600 to-blue-500 text-white font-semibold shadow-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${isLoading
                             ? "opacity-80 cursor-not-allowed"
                             : "hover:scale-[1.03] hover:shadow-purple-500/40 active:scale-[0.97]"
-                            }
-    `}
+                            }`}
                     >
                         {isLoading ? (
                             <>
