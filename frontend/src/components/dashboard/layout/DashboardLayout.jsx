@@ -12,6 +12,7 @@ import FocusMode from "../pages/FocusMode.jsx";
 import Notes from "../pages/Notes.jsx";
 import DashboardNavbarLayout from "./DashboardNavbarLayout.jsx";
 import Interview from "../pages/Interview.jsx";
+import axiosInstance from "../../../utils/axiosInstance.js";
 
 const TABS = [
     { id: "dashboard", name: "Dashboard", icon: LayoutDashboard, description: "Track your productivity and study insights." },
@@ -33,11 +34,21 @@ const DashboardLayout = () => {
     const currentTab = TABS.find(tab => tab.id === activeTab);
 
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    // const { logout } = useAuth();
 
-    const handleLogout = () => {
-        logout();
-        navigate("/login");
+     const handleLogout = async () => {
+        try {
+
+            await axiosInstance.post("/user/logout");
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            navigate("/");
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

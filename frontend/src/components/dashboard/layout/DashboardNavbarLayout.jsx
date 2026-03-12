@@ -22,6 +22,7 @@ const DashboardNavbarLayout = ({ title, description, user }) => {
             console.log(error);
         }
     };
+    
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

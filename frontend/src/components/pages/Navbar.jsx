@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance.js";
 
 const Navbar = () => {
 
@@ -11,10 +12,19 @@ const Navbar = () => {
 
     const user = JSON.parse(localStorage.getItem("user"));
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        navigate("/");
+    const handleLogout = async () => {
+        try {
+
+            await axiosInstance.post("/user/logout");
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            navigate("/");
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
