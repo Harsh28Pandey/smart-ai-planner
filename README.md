@@ -147,7 +147,7 @@ Allows existing users to securely log into the platform.
 
 New users can create an account to start planning their study schedule.
 
-![Sign Up Page](Docs/screenshots/signup.png)
+![Sign Up Page](Docs/screenshots/signup_page.png)
 
 <!--
 ## 📊 Dashboard Overview
