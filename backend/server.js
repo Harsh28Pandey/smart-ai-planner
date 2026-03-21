@@ -1,7 +1,7 @@
 import express from "express"
 import "dotenv/config"
 import connectDB from "./configs/db.js"
-import notesRoutes from "./routes/noteRoute.js";
+import notesRoute from "./routes/noteRoute.js"
 import userRoute from "./routes/userRoute.js"
 import cors from "cors"
 import path from "path"
@@ -17,7 +17,7 @@ app.use(cors({
 
 //* routes
 app.use("/user", userRoute)
-app.use("/api/notes", notesRoutes);
+app.use("/api/notes", notesRoute);
 
 app.use("/uploads", express.static("uploads"))
 // Serve uploads folder
