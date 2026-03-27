@@ -173,7 +173,7 @@ const Notes = () => {
 
                     {/* TITLE BLOCK */}
                     <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur">
-                        <p className="text-xs text-gray-400 mb-2">Title</p>
+                        <p className="text-xl text-gray-400 mb-2">Title</p>
 
                         <div className="flex justify-between items-center">
                             {editingId === selectedNote._id ? (
@@ -200,7 +200,7 @@ const Notes = () => {
 
                     {/* DESCRIPTION BLOCK */}
                     <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur">
-                        <p className="text-xs text-gray-400 mb-2">Description</p>
+                        <p className="text-xl text-gray-400 mb-2">Description</p>
 
                         {editingId === selectedNote._id ? (
                             <textarea
@@ -209,7 +209,7 @@ const Notes = () => {
                                 className="w-full p-3 h-32 rounded-2xl bg-white/10 border border-white/20 outline-none focus:border-blue-400"
                             />
                         ) : (
-                            <p className="text-gray-300 leading-relaxed">
+                            <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
                                 {selectedNote.description}
                             </p>
                         )}
@@ -219,12 +219,12 @@ const Notes = () => {
                     <div className="flex justify-between p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur text-sm text-gray-400">
 
                         <div>
-                            <p className="text-xs mb-1">Created At</p>
+                            <p className="text-xl mb-1">Created At</p>
                             <p>{new Date(selectedNote.createdAt).toLocaleString()}</p>
                         </div>
 
                         <div className="text-right">
-                            <p className="text-xs mb-1">Updated At</p>
+                            <p className="text-xl mb-1">Updated At</p>
                             <p>{new Date(selectedNote.updatedAt).toLocaleString()}</p>
                         </div>
                     </div>
