@@ -219,13 +219,13 @@ const Notes = () => {
                     <div className="flex justify-between p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur text-sm text-gray-400">
 
                         <div>
-                            <p className="text-xl mb-1">Created At</p>
-                            <p>{new Date(selectedNote.createdAt).toLocaleString()}</p>
+                            <p className="text-xl mb-1 font-bold">Created At</p>
+                            <p className="text-sm font-semibold">{new Date(selectedNote.createdAt).toLocaleString()}</p>
                         </div>
 
                         <div className="text-right">
-                            <p className="text-xl mb-1">Updated At</p>
-                            <p>{new Date(selectedNote.updatedAt).toLocaleString()}</p>
+                            <p className="text-xl mb-1 font-bold">Updated At</p>
+                            <p className="text-sm font-semibold">{new Date(selectedNote.updatedAt).toLocaleString()}</p>
                         </div>
                     </div>
 

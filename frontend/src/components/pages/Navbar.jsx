@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance.js";
 
 const Navbar = () => {
@@ -9,6 +9,8 @@ const Navbar = () => {
     const [openDropdown, setOpenDropdown] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate()
+
+    const location = useLocation();
 
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -54,12 +56,25 @@ const Navbar = () => {
                     { name: "Features", path: "/features" },
                     { name: "About", path: "/about" },
                     { name: "Contact", path: "/contact" },
-                ].map((item, i) => (
-                    <Link key={i} to={item.path} className="relative hover:text-white transition-all duration-300 cursor-pointer group">
-                        {item.name}
-                        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-linear-to-r from-yellow-400 via-orange-400 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
-                    </Link>
-                ))}
+                ].map((item, i) => {
+
+                    const isActive = location.pathname === item.path;
+
+                    return (
+                        <Link
+                            key={i}
+                            to={item.path}
+                            className={`relative transition-all duration-300 cursor-pointer group ${isActive ? "text-white" : "text-gray-300 hover:text-white"}`}
+                        >
+                            {item.name}
+
+                            <span
+                                className={`absolute left-0 -bottom-1 h-0.5 bg-linear-to-r from-yellow-400 via-orange-400 to-purple-500 transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"}`}
+                            ></span>
+
+                        </Link>
+                    );
+                })}
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
