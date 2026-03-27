@@ -303,7 +303,7 @@ const Notes = () => {
                         <div className="fixed inset-0 z-50 flex items-center justify-center">
 
                             {/* FORM CARD */}
-                            <div className="relative w-full max-w-lg p-6 rounded-3xl bg-gray-800 border shadow-2xl animate-[fadeIn_.3s_ease]">
+                            <div className="relative w-full max-w-lg p-6 mb-45 rounded-3xl bg-gray-800 border shadow-2xl animate-[fadeIn_.3s_ease]">
 
                                 {/* HEADER */}
                                 <div className="flex justify-between items-center mb-5">
