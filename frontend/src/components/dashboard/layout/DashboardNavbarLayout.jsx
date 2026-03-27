@@ -22,7 +22,7 @@ const DashboardNavbarLayout = ({ title, description, user }) => {
             console.log(error);
         }
     };
-    
+
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -77,7 +77,7 @@ const DashboardNavbarLayout = ({ title, description, user }) => {
 
                 {openDropdown && (
 
-                    <div className="absolute right-0 top-12 w-52 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 overflow-hidden z-1100">
+                    <div className="absolute right-0 top-12 w-52 rounded-2xl bg-black border-white/10 overflow-hidden z-1100">
 
                         <button
                             onClick={() => navigate("/")}
