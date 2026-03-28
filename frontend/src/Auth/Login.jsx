@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateEmail } from "../utils/helper.js";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance.js";
 import { Loader2 } from "lucide-react";
 
 const Login = () => {
@@ -31,9 +31,10 @@ const Login = () => {
             setIsLoading(true);
             setError("");
 
-            const res = await axios.post(
-                "http://localhost:8000/user/login",
-                { email, password }
+            const res = await axiosInstance.post(
+                "/user/login",
+                { email, password },
+                { skipAuthRedirect: true }
             );
 
             // console.log("Login Response:", res.data);

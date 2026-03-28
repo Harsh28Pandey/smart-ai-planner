@@ -48,12 +48,16 @@ const SignUp = () => {
                 profileImageUrl = imgUploadRes.imageUrl || "";
             }
 
-            const response = await axiosInstance.post("/user/register", {
-                username: fullName,
-                email,
-                password,
-                profileImageUrl: profileImageUrl
-            });
+            const response = await axiosInstance.post(
+                "/user/register",
+                {
+                    username: fullName,
+                    email,
+                    password,
+                    profileImageUrl: profileImageUrl,
+                },
+                { skipAuthRedirect: true }
+            );
 
             // localStorage.setItem("token", response.data.token);
             localStorage.setItem("token", response.data.data.token);
