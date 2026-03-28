@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance.js";
 import { CheckCircle, Loader2, RotateCcw } from "lucide-react";
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -72,9 +72,10 @@ const VerifyOTP = () => {
             setIsLoading(true);
             setError("");
 
-            const res = await axios.post(
-                `http://localhost:8000/user/verify-otp/${email}`,
-                { otp: finalOtp }
+            const res = await axiosInstance.post(
+                `/user/verify-otp/${email}`,
+                { otp: finalOtp },
+                { skipAuthRedirect: true }
             );
 
             setSuccessMessage(res.data.message);
@@ -101,8 +102,10 @@ const VerifyOTP = () => {
     // 🔄 Resend OTP
     const resendOtp = async () => {
         try {
-            await axios.post(
-                `http://localhost:8000/user/resend-otp/${email}`
+            await axiosInstance.post(
+                `/user/resend-otp/${email}`,
+                {},
+                { skipAuthRedirect: true }
             );
             setTimer(30);
             setSuccessMessage("New OTP sent successfully!");

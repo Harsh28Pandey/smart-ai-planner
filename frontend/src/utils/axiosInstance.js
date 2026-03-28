@@ -1,7 +1,7 @@
 import axios from "axios"
-// import { BASE_URL } from "./apiPaths.js"
+import { API_BASE_URL } from "../config/api.js"
 
-const BASE_URL = "http://localhost:8000"
+const BASE_URL = API_BASE_URL
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
@@ -34,8 +34,10 @@ axiosInstance.interceptors.response.use(
     (error) => {
         // handle common errors globally
         if (error.response) {
-            if (error.response.status === 401) {
-                // redirect to login page
+            if (
+                error.response.status === 401 &&
+                !error.config?.skipAuthRedirect
+            ) {
                 window.location.href = "/"
             } else if (error.response.status) {
                 console.log("Server Error. Please Try Again Later.")
