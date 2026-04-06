@@ -10,8 +10,9 @@ const app = express()
 
 //* middlewares
 app.use(express.json())
+const corsOrigin = process.env.CORS_ORIGIN || "http://localhost:5173"
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: corsOrigin,
     credentials: true
 }))
 
@@ -23,7 +24,7 @@ app.use("/uploads", express.static("uploads"))
 // Serve uploads folder
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")))
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8000
 
 //* server starting
 app.listen(PORT, () => {
